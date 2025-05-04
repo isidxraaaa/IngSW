@@ -57,4 +57,3 @@ const styles = StyleSheet.create({
     height: 40, // Ajusta el tamaño de la imagen
   },
 });
-
