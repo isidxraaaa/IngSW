@@ -1,5 +1,5 @@
-import { Link, useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import globalStyles from './globalStyles';
 
@@ -14,13 +14,12 @@ export default function Index() {
       return;
     }
 
-    // 🔑 Aquí defines el rol (en un caso real esto vendría de una API)
     const rol = rut === 'admin' ? 'admin' : 'trabajador';
 
     if (rol === 'admin') {
-      router.push('/admin/main');  // Redirige correctamente a la vista de admin
+      router.push('/admin/main');
     } else {
-      router.push('/trabajador/maint');  // Redirige correctamente a la vista de trabajador
+      router.push('/trabajador/maint');
     }
   };
 
@@ -29,7 +28,7 @@ export default function Index() {
       <Text style={globalStyles.title}>¡Bienvenid@ a Tasky!</Text>
 
       <Image
-        source={require('../assets/images/logotasky.jpg')}  // Corrigiendo la ruta
+        source={require('../assets/images/logotasky.jpg')}
         style={styles.image}
       />
 
@@ -44,23 +43,24 @@ export default function Index() {
           onChangeText={setRut}
         />
         <TextInput
-          style={globalStyles.input}
-          placeholder="Contraseña"
-          secureTextEntry
-          placeholderTextColor="#999"
-          value={password}
-          onChangeText={setPassword}
+        style={globalStyles.input}
+        placeholder="Contraseña"
+        secureTextEntry
+        placeholderTextColor="#999"
+        value={password}
+        onChangeText={setPassword}
         />
 
         <TouchableOpacity style={globalStyles.button} onPress={handleLogin}>
-          <Text style={globalStyles.buttonText}>Iniciar sesión</Text>
+        <Text style={globalStyles.buttonText}>Iniciar sesión</Text>
         </TouchableOpacity>
 
-        <Text style={globalStyles.registerText}>
-          <Link href="/(tabs)/forgotPassword" style={globalStyles.registerLink}>
-            ¿Olvidaste tu contraseña?
-          </Link>
-        </Text>
+        <TouchableOpacity onPress={() => router.push('/(tabs)/forgotPassword')}>
+  <Text style={globalStyles.registerLink}>
+    ¿Olvidaste tu contraseña?
+  </Text>
+</TouchableOpacity>
+
       </View>
     </View>
   );
@@ -75,4 +75,3 @@ const styles = StyleSheet.create({
     height: 40,
   },
 });
-
