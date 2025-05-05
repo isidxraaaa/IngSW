@@ -1,54 +1,30 @@
-import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import globalStyles from '../globalStyles';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import globalStyles from '../globalStyles'; // Usa los estilos globales que ya tienes
 
 export default function ForgotPassword() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
 
-  const handleSend = () => {
+  const handleResetPassword = () => {
     if (email.trim() === '') {
-      Alert.alert('Debe ingresar su correo'); // ✅ Este es el mensaje que debería aparecer
+      alert('Por favor ingrese un correo electrónico.');
       return;
     }
-
-    router.push('/(tabs)/sent');  // Aquí redirige a sent.tsx
+    alert('Correo de recuperación enviado!');
   };
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.title}>Recupera tu contraseña</Text>
-
-      <View style={globalStyles.formContainer}>
-        <Text style={globalStyles.subtitle}>
-          Para recuperar tu contraseña, ingresa el correo asociado a la cuenta:
-        </Text>
-
-        <TextInput
-          style={globalStyles.input}
-          placeholder="Correo"
-          placeholderTextColor="#999"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          value={email}
-          onChangeText={setEmail}
-        />
-
-        <TouchableOpacity style={globalStyles.button} onPress={handleSend}>
-          <Text style={globalStyles.buttonText}>Enviar</Text>
-        </TouchableOpacity>
-
-        <Text style={globalStyles.registerText}>
-          <Text
-            style={globalStyles.registerLink}
-            onPress={() => router.push('/')}
-            // Cambio para regresar a la pantalla de inicio
-          >
-            Regresar a Iniciar Sesión
-          </Text>
-        </Text>
-      </View>
+      <Text style={globalStyles.title}>Recuperar Contraseña</Text>
+      <TextInput
+        style={globalStyles.input}
+        placeholder="Correo electrónico"
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TouchableOpacity style={globalStyles.button} onPress={handleResetPassword}>
+        <Text style={globalStyles.buttonText}>Recuperar contraseña</Text>
+      </TouchableOpacity>
     </View>
   );
 }
